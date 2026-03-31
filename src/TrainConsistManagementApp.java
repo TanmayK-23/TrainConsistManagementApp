@@ -1,8 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.LinkedList;
+import java.util.*;
 
 /**
  * ================================================================
@@ -186,5 +182,47 @@ class UseCase4TrainConsistMgmt {
         System.out.println(trainConsist);
 
         System.out.println("\nUC4 ordered consist operations completed...");
+    }
+}
+/**
+ * ================================================================
+ * MAIN CLASS - UseCase5TrainConsistMgmt
+ * ================================================================
+ *
+ * Use Case 5: Preserve Insertion Order of Bogies
+ *
+ * Description:
+ * This class maintains the exact attachment order of bogies
+ * while also preventing duplicate entries using LinkedHashSet.
+ *
+ * @version 5.0
+ */
+class UseCase5TrainConsistMgmt {
+
+    public static void main(String[] args) {
+
+        System.out.println("======================================");
+        System.out.println("UC5 - Preserve Insertion Order of Bogies");
+        System.out.println("======================================\n");
+
+        // LinkedHashSet preserves order and ensures uniqueness
+        Set<String> formation = new LinkedHashSet<>();
+
+        // Adding bogies (with duplicates)
+        formation.add("Engine");
+        formation.add("Sleeper");
+        formation.add("Cargo");
+        formation.add("Guard");
+
+        formation.add("Sleeper"); // duplicate
+        formation.add("Cargo");   // duplicate
+
+        System.out.println("Final Train Formation:");
+        System.out.println(formation);
+
+        System.out.println("\nNote:");
+        System.out.println("LinkedHashSet preserves insertion order and removes duplicates automatically.");
+
+        System.out.println("\nUC5 formation setup completed...");
     }
 }
