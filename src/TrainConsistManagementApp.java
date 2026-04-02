@@ -444,3 +444,59 @@ class UseCase9TrainConsistMgmt {
         System.out.println("\nUC9 grouping completed...");
     }
 }
+/**
+ * ================================================================
+ * MAIN CLASS - UseCase10TrainConsistMgmt
+ * ================================================================
+ *
+ * Use Case 10: Count Total Seats in Train
+ *
+ * @version 10.0
+ */
+class UseCase10TrainConsistMgmt {
+
+    static class Bogie {
+        String name;
+        int capacity;
+
+        Bogie(String name, int capacity) {
+            this.name = name;
+            this.capacity = capacity;
+        }
+    }
+
+    public static void main(String[] args) {
+
+        System.out.println("======================================");
+        System.out.println("UC10 - Count Total Seats in Train");
+        System.out.println("======================================\n");
+
+        List<Bogie> bogies = new ArrayList<>();
+
+        bogies.add(new Bogie("Sleeper", 72));
+        bogies.add(new Bogie("AC Chair", 56));
+        bogies.add(new Bogie("First Class", 24));
+        bogies.add(new Bogie("Sleeper", 70));
+
+        System.out.println("Bogies in Train:");
+        for (Bogie b : bogies) {
+            System.out.println(b.name + " -> " + b.capacity);
+        }
+
+        //  REDUCE OPERATION
+        int total = bogies.stream()
+                .map(b -> b.capacity)
+                .reduce(0, Integer::sum);
+
+        System.out.println("\nTotal Seating Capacity of Train: " + total);
+
+        System.out.println("\nUC10 aggregation completed...");
+    }
+
+    //  METHOD FOR TESTING
+    public static int totalCapacity(List<Bogie> bogies) {
+        return bogies.stream()
+                .map(b -> b.capacity)
+                .reduce(0, Integer::sum);
+    }
+}
