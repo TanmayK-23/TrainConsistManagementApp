@@ -613,3 +613,76 @@ class UseCase12TrainConsistMgmt {
                 .allMatch(g -> !g.type.equals("Cylindrical") || g.cargo.equals("Petroleum"));
     }
 }
+/**
+ * ================================================================
+ * MAIN CLASS - UseCase13TrainConsistMgmt
+ * ================================================================
+ *
+ * Use Case 13: Performance Comparison (Loops vs Streams)
+ *
+ * @version 13.0
+ */
+class UseCase13TrainConsistMgmt {
+
+    // Bogie model
+    static class Bogie {
+        String type;
+        int capacity;
+
+        Bogie(String type, int capacity) {
+            this.type = type;
+            this.capacity = capacity;
+        }
+    }
+
+    public static void main(String[] args) {
+
+        System.out.println("======================================");
+        System.out.println("UC13 - Performance Comparison (Loops vs Streams)");
+        System.out.println("======================================\n");
+
+        // Create large dataset
+        List<Bogie> bogies = new ArrayList<>();
+        for (int i = 0; i < 100000; i++) {
+            bogies.add(new Bogie("Type" + i, i % 100));
+        }
+
+        //  Loop filtering
+        long startLoop = System.nanoTime();
+
+        List<Bogie> loopResult = filterUsingLoop(bogies);
+
+        long endLoop = System.nanoTime();
+
+        //  Stream filtering
+        long startStream = System.nanoTime();
+
+        List<Bogie> streamResult = filterUsingStream(bogies);
+
+        long endStream = System.nanoTime();
+
+        // Results
+        System.out.println("Loop Execution Time (ns): " + (endLoop - startLoop));
+        System.out.println("Stream Execution Time (ns): " + (endStream - startStream));
+
+        System.out.println("\nUC13 performance benchmarking completed...");
+    }
+
+    //  Loop logic
+    public static List<Bogie> filterUsingLoop(List<Bogie> bogies) {
+        List<Bogie> result = new ArrayList<>();
+        for (Bogie b : bogies) {
+            if (b.capacity > 60) {
+                result.add(b);
+            }
+        }
+        return result;
+    }
+
+    //  Stream logic
+    public static List<Bogie> filterUsingStream(List<Bogie> bogies) {
+        return bogies.stream()
+                .filter(b -> b.capacity > 60)
+                .collect(Collectors.toList());
+    }
+}
