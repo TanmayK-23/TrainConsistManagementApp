@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
@@ -498,5 +499,56 @@ class UseCase10TrainConsistMgmt {
         return bogies.stream()
                 .map(b -> b.capacity)
                 .reduce(0, Integer::sum);
+    }
+}
+/**
+ * ================================================================
+ * MAIN CLASS - UseCase11TrainConsistMgmt
+ * ================================================================
+ *
+ * Use Case 11: Validate Train ID and Cargo Code
+ *
+ * @version 11.0
+ */
+class UseCase11TrainConsistMgmt {
+
+    // Regex patterns
+    private static final String TRAIN_REGEX = "TRN-\\d{4}";
+    private static final String CARGO_REGEX = "[A-Z]{3}-[A-Z]{2}";
+
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("======================================");
+        System.out.println("UC11 - Validate Train ID and Cargo Code");
+        System.out.println("======================================\n");
+
+        // Input
+        System.out.print("Enter Train ID (Format: TRN-1234): ");
+        String trainId = scanner.nextLine();
+
+        System.out.print("Enter Cargo Code (Format: PET-AB): ");
+        String cargoCode = scanner.nextLine();
+
+        // Validation
+        boolean isTrainValid = validateTrainId(trainId);
+        boolean isCargoValid = validateCargoCode(cargoCode);
+
+        // Output
+        System.out.println("\nValidation Results:");
+        System.out.println("Train ID Valid: " + isTrainValid);
+        System.out.println("Cargo Code Valid: " + isCargoValid);
+
+        System.out.println("\nUC11 validation completed...");
+    }
+
+    // 🔥 Methods for testing
+    public static boolean validateTrainId(String trainId) {
+        return Pattern.matches(TRAIN_REGEX, trainId);
+    }
+
+    public static boolean validateCargoCode(String cargoCode) {
+        return Pattern.matches(CARGO_REGEX, cargoCode);
     }
 }
