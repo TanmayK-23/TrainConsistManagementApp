@@ -858,3 +858,40 @@ class UseCase16TrainConsistMgmt {
         }
     }
 }
+/**
+ * ================================================================
+ * MAIN CLASS - UseCase17TrainConsistMgmt
+ * ================================================================
+ *
+ * Use Case 17: Sort Bogie Names Using Arrays.sort()
+ *
+ * @version 17.0
+ */
+class UseCase17TrainConsistMgmt {
+
+    public static void main(String[] args) {
+
+        System.out.println("======================================");
+        System.out.println("UC17 - Sort Bogie Names Using Arrays.sort()");
+        System.out.println("======================================\n");
+
+        String[] bogieNames = {"Sleeper", "AC Chair", "First Class", "General", "Luxury"};
+
+        // Display original
+        System.out.println("Original Bogie Names:");
+        System.out.println(Arrays.toString(bogieNames));
+
+        // Sorting
+        Arrays.sort(bogieNames);
+
+        // Display sorted
+        System.out.println("\nSorted Bogie Names (Alphabetical):");
+        System.out.println(Arrays.toString(bogieNames));
+
+        System.out.println("\nUC17 sorting completed...");
+    }
+
+    public static void sortNames(String[] arr) {
+        Arrays.sort(arr);
+    }
+}
