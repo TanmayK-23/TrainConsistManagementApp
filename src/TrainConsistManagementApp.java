@@ -1037,3 +1037,65 @@ class UseCase19TrainConsistMgmt {
         return false;
     }
 }
+/**
+ * ================================================================
+ * MAIN CLASS - UseCase20TrainConsistMgmt
+ * ================================================================
+ *
+ * Use Case 20: Exception Handling During Search Operations
+ *
+ * @version 20.0
+ */
+class UseCase20TrainConsistMgmt {
+
+    public static void main(String[] args) {
+
+        System.out.println("======================================");
+        System.out.println("UC20 - Exception Handling During Search");
+        System.out.println("======================================\n");
+
+        // Empty bogie list (fail-fast scenario)
+        String[] bogieIds = {};
+
+        String searchId = "BG101";
+
+        // FAIL-FAST VALIDATION
+        if (bogieIds.length == 0) {
+            throw new IllegalStateException("No bogies available in train. Cannot perform search.");
+        }
+
+        // Search logic
+        boolean found = false;
+
+        for (String id : bogieIds) {
+            if (id.equals(searchId)) {
+                found = true;
+                break;
+            }
+        }
+
+        // Result
+        if (found) {
+            System.out.println("Bogie found.");
+        } else {
+            System.out.println("Bogie not found.");
+        }
+
+        System.out.println("\nUC20 execution completed...");
+    }
+
+    // Method for testing
+    public static boolean searchWithValidation(String[] arr, String key) {
+
+        if (arr.length == 0) {
+            throw new IllegalStateException("No bogies available in train. Cannot perform search.");
+        }
+
+        for (String id : arr) {
+            if (id.equals(key)) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
