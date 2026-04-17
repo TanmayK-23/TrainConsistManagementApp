@@ -954,3 +954,86 @@ class UseCase18TrainConsistMgmt {
         return false;
     }
 }
+/**
+ * ================================================================
+ * MAIN CLASS - UseCase19TrainConsistMgmt
+ * ================================================================
+ *
+ * Use Case 19: Binary Search for Bogie ID
+ *
+ * @version 19.0
+ */
+class UseCase19TrainConsistMgmt {
+
+    public static void main(String[] args) {
+
+        System.out.println("======================================");
+        System.out.println("UC19 - Binary Search for Bogie ID");
+        System.out.println("======================================\n");
+
+        // Create sorted array of bogie IDs
+        String[] bogieIds = {"BG101", "BG205", "BG309", "BG412", "BG550"};
+
+        // Ensure sorted (precondition)
+        Arrays.sort(bogieIds);
+
+        // Search key
+        String key = "BG309";
+
+        // Display
+        System.out.println("Sorted Bogie IDs:");
+        for (String id : bogieIds) {
+            System.out.println(id);
+        }
+
+        // Binary Search
+        int left = 0;
+        int right = bogieIds.length - 1;
+        boolean found = false;
+
+        while (left <= right) {
+            int mid = (left + right) / 2;
+
+            int cmp = bogieIds[mid].compareTo(key);
+
+            if (cmp == 0) {
+                found = true;
+                break;
+            } else if (cmp < 0) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        // Result
+        if (found) {
+            System.out.println("\nBogie " + key + " found using Binary Search.");
+        } else {
+            System.out.println("\nBogie " + key + " NOT found.");
+        }
+
+        System.out.println("\nUC19 search completed...");
+    }
+
+    // Method for testing
+    public static boolean binarySearch(String[] arr, String key) {
+
+        Arrays.sort(arr);
+
+        int left = 0;
+        int right = arr.length - 1;
+
+        while (left <= right) {
+            int mid = (left + right) / 2;
+
+            int cmp = arr[mid].compareTo(key);
+
+            if (cmp == 0) return true;
+            else if (cmp < 0) left = mid + 1;
+            else right = mid - 1;
+        }
+
+        return false;
+    }
+}
